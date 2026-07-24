@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  A tiny native macOS menu-bar app that keeps your Mac awake for remote work—with a little coffee splash instead of another Terminal ritual.
+  A tiny native macOS menu-bar app that keeps your Mac awake for remote work—with a clear coffee splash instead of another Terminal step.
 </p>
 
 <p align="center">
@@ -42,7 +42,7 @@ The Terminal command was never the hard part. **Remembering it was.**
 
 Activity Monitor could tell me whether the process was still alive, but that meant opening another tool and checking another list. The state that mattered most—_is this Mac safe to leave?_—was invisible at the exact moment I needed it.
 
-So I turned that ritual into one coffee cup:
+So I turned that workflow into one coffee cup:
 
 - Click once: the Mac is caffeinated.
 - See the coffee splash: the state change is unmistakable.
