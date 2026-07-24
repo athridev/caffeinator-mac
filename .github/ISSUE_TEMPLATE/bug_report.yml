@@ -1,0 +1,54 @@
+name: Bug report
+description: Report a reproducible problem with Caffeinator
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a problem.
+  - type: input
+    id: version
+    attributes:
+      label: Caffeinator version
+      placeholder: "1.1"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS and Mac
+      placeholder: "macOS 15.4, Apple Silicon"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Caffeinator
+        2. Choose…
+        3. Observe…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: assertions
+    attributes:
+      label: Power assertions
+      description: If relevant, paste the Caffeinator portion of `pmset -g assertions`.
+      render: shell
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context

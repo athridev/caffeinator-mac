@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Build universal app
+        run: ./build.sh "$RUNNER_TEMP/caffeinator-output"
+
+      - name: Test session lifecycle
+        run: |
+          "$RUNNER_TEMP/caffeinator-output/Caffeinator.app/Contents/MacOS/Caffeinator" --self-test
+
+      - name: Verify bundle
+        run: |
+          plutil -lint "$RUNNER_TEMP/caffeinator-output/Caffeinator.app/Contents/Info.plist"
+          codesign --verify --deep --strict --verbose=2 "$RUNNER_TEMP/caffeinator-output/Caffeinator.app"
+          lipo -info "$RUNNER_TEMP/caffeinator-output/Caffeinator.app/Contents/MacOS/Caffeinator"
+          unzip -tq "$RUNNER_TEMP/caffeinator-output/Caffeinator-macOS.zip"
+
+      - name: Upload app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Caffeinator-macOS
+          path: ${{ runner.temp }}/caffeinator-output/Caffeinator-macOS.zip
+          if-no-files-found: error
